@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<style type="text/css">
+	label {
+		display: inline-block;
+		width: 150px;
+	}
+	label.error {
+		display: inline-block;
+		color:red;
+		width: 200px;
+	}
+		</style>
+	
+</head>
+<body>
+<div class="container" id="main-content">
+		<div class="row d-flex justify-content-center">
+		<div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+			        <span th:text="${successMessage}"></span>
+			        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			            <span aria-hidden="true">&times;</span>
+			        </button>
+    		</div>
+			<form id ="formadd" style="min-width: 300px;" action="#" th:action="@{/product/save}" th:object="${product}" method="post"
+				  novalidate="novalidate">
+				<h5 class="text-center">FORM PRODUCT</h5>
+
+				<input type="hidden" th:field="*{id}" />
+
+				<div class="form-group">
+					<input name="name" class="form-control" type="text" placeholder="Nhập tên sản phẩm"
+						   th:field="*{name}" th:errorclass="field-error" />
+					<em th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></em>
+				</div>
+
+				<div class="form-group">
+					<input name="price" class="form-control" type="text" placeholder="Nhập giá Sản phẩm"
+						   th:field="*{price}" th:errorclass="field-error" />
+					<em th:if="${#fields.hasErrors('price')}" th:errors="*{price}" ></em>
+						   
+				</div>
+
+				<div class="form-group">
+					<input name="phone" class="form-control" type="text" placeholder="Nhập mô tả sản phẩm"
+						   th:field="*{description}" />
+				   <em th:if="${#fields.hasErrors('description')}" th:errors="*{description}" ></em>
+						   
+				</div>
+
+			  <div class="form-group">
+			        <button type="submit" class="btn btn-block btn-primary">
+			            <i class="fa fa-save"></i> Save
+			        </button>
+			    </div>
+			    
+			  <div class="form-group">
+			       <a href="" th:href="@{/product}" class="btn btn-success">Back </a>
+			    </div>
+			</form>
+			
+		
+ 
+		</div>
+	</div><!-- /.container -->
+
+</body>
+</html>

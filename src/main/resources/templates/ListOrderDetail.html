@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: head">
+<src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+</head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<!-- Menu navigation -->
+			<div class="col-md-3 left_col" th:replace="Layout :: left_col"></div>
+
+			<!-- top navigation -->
+			<div class="top_nav" th:replace="Layout :: top_nav"></div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main"
+				th:each="product,iterStat : ${listorder}">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								Chi Tiết Đơn Hàng 
+							</h3>
+						</div>
+
+					</div>
+
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">
+								<div class="x_content">
+									<div th:text="${successMessage}"
+										th:if="${successMessage ne null}" class="alert alert-success"
+										id="Alerbox"></div>
+
+									<!-- start project list -->
+									<table class="table table-striped projects">
+										<thead>
+											<tr>
+												<th>Mã Đơn Hàng</th>
+												<th>Tên Khách Hàng</th>
+												<th>Số Điện Thoại</th>
+												<th>Địa Chỉ Đặt Hàng</th>
+												<th>Số Tiền</th>
+												<th>Ngày Đặt Mua</th>
+												<th>Trạng thái Mua Hàng</th>
+												<th></th>								
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr>
+												<td th:text="${'#00'+product.id}"></td>
+												<td th:text="${product.user.name}"></td>
+												<td th:text="${product.user.phone}"></td>
+												<td th:text="${product.user.address}"></td>
+												<td th:text="${#numbers.formatDecimal(product.amount, 0, 'COMMA', 0, 'POINT')} + 'VND' "></td>
+												<td th:text="${#dates.format(product.date, 'dd/MM/yyyy')}"></td>
+												<td th:if="${product.status} > 0 ">
+													<button type="button" class="btn btn-round btn-danger">Xử lý</button>
+												</td>
+													<td th:if="${product.status} == 0 ">
+													<button type="button" class="btn btn-round btn-success" style="font-size: 13px;">Chưa Xử lý</button>
+												</td>
+											
+			
+												<td th:if="${product.status} == 0 " ><a href="#"
+													th:href="@{/Admin/ListOrder/OrderDetailUpdate/} + ${product.id}"
+													class="btn btn-round btn-info" style="font-size: 13px;">Xác Nhận Đơn Hàng</a>
+													</td>
+
+											</tr>
+										</tbody>
+									</table>
+									<!-- end project list -->
+
+								</div>
+							</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">					
+								<div class="x_content">
+									
+									<!-- start project list -->
+									<table class="table table-striped projects">
+										<thead>
+											<tr>
+												<th>Mã Cá Giống</th>
+												<th style="width: 20%">Tên Cá Giống</th>
+												<th>Hình Ảnh</th>
+												<th>Số lượng</th>
+												<th>Giá</th>
+												<th style="width: 20%">Thành Tiền</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="test,iterStat : ${product.orderDetail}">
+												<td th:text="${'00'+test.fish.id}"></td>
+												<td th:text="${test.fish.name}"></td>
+												<td>
+													<ul class="list-inline">
+														<li><img th:src="@{'~/uploads/'+${test.fish.image}}"
+															width="100px" height="100px"></li>
+													</ul>
+												</td>
+
+												<td th:text="${test.quality}"></td>
+												<td th:if=" ${test.fish.price} == 0 ">Liên hệ với trại
+													giống</td>
+
+												<td th:if="${test.fish.price} > 0 "
+													th:text="${#numbers.formatDecimal(test.fish.price, 0, 'COMMA', 0, 'POINT')} + 'VND'"></td>
+												<td class="a-center last">
+												<span class="cart-price"
+															th:with="formattedTotal = ${test.fish.price} * ${test.quality}"
+															th:text="  ${#numbers.formatDecimal(formattedTotal, 0, 'COMMA', 0, 'POINT')}+ 'VND'">>
+												</td>
+			
+											</tr>
+
+										</tbody>
+									</table>
+									<!-- end project list -->
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer th:replace="Layout :: footer"></footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../static/vendors/jquery/dist/jquery.min.js"
+		th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="../static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"
+		th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+
+
+	<!-- bootstrap-progressbar -->
+	<script
+		src="../static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"
+		th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+
+
+	<!-- Custom Theme Scripts -->
+	<script src="../static/vendors/custom.min.js"
+		th:src="@{/vendors/custom.min.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(5000).slideUp(1500);
+		});
+	</script>
+
+
+</body>
+</html>

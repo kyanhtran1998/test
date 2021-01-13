@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>QUẢN LÝ TÀI KHOẢN</h2>
+						<div class="panel-group category-products" id="accordian">
+							<!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a th:href="@{/User/ThongTinKhachHang}">Thông Tin Khách Hàng</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a th:href="@{/User/DoiMatKhau}">Đổi Mật Khẩu</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a th:href="@{/User/DonHang}">Đơn Hàng Đang Mua</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a th:href="@{/User/DonHangDaMua}">Đơn Hàng Đã Mua</a>
+									</h4>
+								</div>
+							</div>
+							
+						</div>
+						<!--/category-products-->
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items">
+						<!--features_items-->
+						<h2 class="title text-center">THÔNG TIN TÀI KHOẢN</h2>
+						<div class="col-sm-12">
+							<form th:action="@{/User/ThongTinKhachHang}" method="post" th:object="${user}">
+											<div class="form-group" th:if="${thongtin}">
+												<div id="Alerbox" class="alert alert-danger"  th:text="${thongtin}">Vui Lòng Nhập Đúng Thông Tin</div>
+											</div>
+											<div class="form-group" th:if="${message}">
+												<div id="Alerbox" class="alert alert-success" th:text="${message}">Cập Nhật Thành Công</div>
+											</div>
+											<input type="hidden" th:field="*{id}" />
+											<div class="form-group">
+												<label for="oldPassword" class="control-label">Tên</label>
+												<input type="text" class="form-control" th:field="*{name}" required>
+											</div>
+											<div class="form-group">
+												<label for="confirmPassword" class="control-label">Số Điện Thoại
+													</label> <input type="text" class="form-control" th:field="*{phone}" required>
+											</div>
+											<div class="form-group">
+												<label for="newPassword" class="control-label">Địa Chỉ</label>
+												<input type="text" class="form-control" th:field="*{address}" required>
+											</div>
+									
+											<div class="form-group">
+												<button type="submit" class="btn btn-danger">Cập Nhật</button>
+											</div>
+
+									</form>
+						</div>
+					</div>
+					<!--features_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(3000).slideUp(1000);	
+		});
+	</script>
+
+
+</body>
+</html>

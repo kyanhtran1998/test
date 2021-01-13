@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headPage">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Trang Chủ</title>
+    <link th:href="@{/Home/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/Home/css/font-awesome.min.css}" rel="stylesheet" />
+    <link th:href="@{/Home/css/prettyPhoto.css}" rel="stylesheet" />
+    <link th:href="@{/Home/css/price-range.css}" rel="stylesheet" />    
+    <link th:href="@{/Home/css/animate.css}" rel="stylesheet" />
+    <link th:href="@{/Home/css/main.css}" rel="stylesheet" />	
+	<link th:href="@{/Home/css/responsive.css}" rel="stylesheet" />
+</head><!--/head-->
+
+<body>
+	<header id="header" th:fragment="head"><!--header-->
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 clearfix">
+						
+					</div>
+					<div class="col-md-8 clearfix">
+						<div class="shop-menu clearfix pull-right">
+							<ul class="nav navbar-nav">
+								<li><a th:href="@{/User/GioHang}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+								<li sec:authorize="!isAuthenticated()"><a th:href="@{/DangNhap}"><i class="fa fa-lock"></i> Đăng Nhập</a></li>
+								<li sec:authorize="!isAuthenticated()"><a th:href="@{/DangKy}"><i class="fa fa-lock"></i> Đăng Ký</a></li>
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a th:href="@{/TrangChu}" class="active">TRANG CHỦ</a></li>
+								<li><a th:href="@{/GioiThieu}">GIỚI THIỆU</a></li>
+								<li><a th:href="@{/DanhsachCagiong}">CÁ GIỐNG</a></li>
+								<li><a th:href="@{/TinTuc}">TIN TỨC</a></li>
+								<li><a th:href="@{/LienHe}">LIÊN HỆ</a></li>
+								<li class="dropdown" th:if="${#authorization.expression('isAuthenticated()')}" > 
+								<a href="#" sec:authentication="name"><i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a th:href="@{/User/ThongTinKhachHang}">Thông Tin Tài Khoản</a></li>
+										<li><a th:href="@{/User/DoiMatKhau}">Đổi Mật Khẩu</a></li> 
+										<li><a th:href="@{/User/DonHang}">Đơn Hàng Đang Mua</a></li> 
+										<li><a th:href="@{/User/DonHangDaMua}">Đơn Hàng Đã Mua</a></li> 
+										<li><a th:href="@{/DangXuat}">Đăng Xuất</a></li> 
+                                    </ul>
+                                </li> 
+                                <li><a th:href="@{/Admin/ListFish}" sec:authorize="hasRole('ADMIN')" >TRANG ADMIN</a></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-sm-3">
+					<form method="get" th:action="@{/DanhsachCagiong/timkiem/1}">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Tìm Kiếm Cá Giống" name="term"/>
+							<button type="Submit" class="btn btn-secondary"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</form>	
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	<section id="slider"  th:fragment="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+							<li data-target="#slider-carousel" data-slide-to="3"></li>
+						</ol>
+						
+						<div class="carousel-inner" th:if="${not #lists.isEmpty(backGround)}" >
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><strong>TRẠI GIỐNG CÁ KIM NGÂN</strong></h1>
+									<h2>Chuyên Cung Cấp Loại Cá Giống</h2>
+									<p>Chuyên Cung Cấp Các Loại Cá Như: Cá Tra, Cá Trê, Cá Rô, Cá Lóc, Cá Tai Tượng, Cá Trăm Cỏ, Cá mè Trắng, Lươn Giống,... </p>
+									<button type="button" class="btn btn-default get">Mua Ngay</button>
+								</div>
+								<div class="col-sm-6">
+								<img th:src="@{'~/uploads/'+${backGround.get(0).image}}"  class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+							
+							<div class="item" th:each="background,iterStat : ${backGround}" th:if="${iterStat.index} > 0 ">
+								<div class="col-sm-6" >
+									<h1><strong>TRẠI GIỐNG CÁ KIM NGÂN</strong></h1>
+									<h2>Chuyên Cung Cấp Loại Cá Giống</h2>
+									<p>Chuyên Cung Cấp Các Loại Cá Như: Cá Tra, Cá Trê, Cá Rô, Cá Lóc, Cá Tai Tượng, Cá Trăm Cỏ, Cá mè Trắng, Lươn Giống,... </p>
+									<button type="button" class="btn btn-default get">Mua Ngay</button>
+								</div>
+								<div class="col-sm-6" >
+								<img th:src="@{'~/uploads/'+${background.image}}"  class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
+			
+			</div>
+		</div>
+	</section><!--/slider-->
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>DANH SÁCH CÁ GIỐNG</h2>
+						<div class="panel-group category-products" id="accordian">
+						<!--category-productsr-->
+							<div class="panel panel-default" th:if="${not #lists.isEmpty(Top10Fish)}"  th:each="top10Fish,iterStat : ${Top10Fish} ">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a  th:href="@{'/ChiTietCaGiong/' +${top10Fish.id}}" th:text="${top10Fish.name}" ></a></h4>
+								</div>
+							</div>
+						</div><!--/category-products-->
+					
+						
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right" th:if="${not #lists.isEmpty(fishNew)}"  >
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Cá Giống Mới Nhất</h2>
+						<div class="col-sm-4" th:if="${fishTop}" th:each="fishNew,iterStat : ${fishTop}" >
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+											<a th:href="@{'/ChiTietCaGiong/' +${fishNew.id}}"> 									
+											<img th:src="@{'~/uploads/'+${fishNew.image}}" alt="" />
+											</a>
+											<h2 th:if=" ${fishNew.price} == 0 ">Liên hệ với trại giống</h2>
+											<h2 th:if="${fishNew.price} > 0 " th:text="${#numbers.formatDecimal(fishNew.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+											<p th:text="${fishNew.name}" ><a th:href="@{/ChiTietCaGiong/ +${fishNew.id}}" ></a></p>
+											<a th:href="@{'/User/ThemVaoGioHang/' + ${fishNew.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+										</div>
+								</div>
+							</div>
+						</div>		
+					</div><!--features_items-->
+					
+				
+					
+					<div class="recommended_items" th:if="${not #lists.isEmpty(fishs)}" th:fragment="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">Cá Giống Nổi Bật</h2>
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									<div class="col-sm-4"  th:each="test,iterStat : ${fishs}" th:if="${iterStat.index} < 3 ">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<a th:href="@{'/ChiTietCaGiong/' +${test.fish.id}}"> 									
+													<img th:src="@{'~/uploads/'+${test.fish.image}}" alt="" />
+													</a>
+													<h2 th:if=" ${test.fish.price} == 0 ">Liên hệ với trại giống</h2>
+													<h2 th:if="${test.fish.price} > 0 " th:text="${#numbers.formatDecimal(test.fish.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+													<p th:text="${test.fish.name}" ><a th:href="@{/ChiTietCaGiong/ +${test.fish.id}}" ></a></p>
+													<a th:href="@{'/User/ThemVaoGioHang/' + ${test.fish.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>								
+								</div>
+								<div class="item ">	
+									<div class="col-sm-4"  th:each="test1,iterStat1 : ${fishs}" th:if="${iterStat1.index} &gt; 2 and ${iterStat1.index} &lt; 6 " >
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<a th:href="@{'/ChiTietCaGiong/' +${test1.fish.id}}"> 									
+													<img th:src="@{'~/uploads/'+${test1.fish.image}}" alt="" />
+													</a>
+													<h2 th:if=" ${test1.fish.price} == 0 ">Liên hệ với trại giống</h2>
+													<h2 th:if="${test1.fish.price} > 0 " th:text="${#numbers.formatDecimal(test1.fish.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+													<p th:text="${test1.fish.name}" ><a th:href="@{/ChiTietCaGiong/ +${test1.fish.id}}" ></a></p>
+													<a th:href="@{'/User/ThemVaoGioHang/' + ${test1.fish.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>								
+								</div>	
+								<div class="item ">	
+									<div class="col-sm-4" th:each="test1,iterStat1 : ${fishs}" th:if="${iterStat1.index} &gt; 5 and ${iterStat1.index} &lt; 9 " >
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<a th:href="@{'/ChiTietCaGiong/' +${test1.fish.id}}"> 									
+													<img th:src="@{'~/uploads/'+${test1.fish.image}}" alt="" />
+													</a>
+													<h2 th:if=" ${test1.fish.price} == 0 ">Liên hệ với trại giống</h2>
+													<h2 th:if="${test1.fish.price} > 0 " th:text="${#numbers.formatDecimal(test1.fish.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+													<p th:text="${test1.fish.name}" ><a th:href="@{/ChiTietCaGiong/ +${test1.fish.id}}" ></a></p>
+													<a th:href="@{'/User/ThemVaoGioHang/' + ${test1.fish.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>								
+								</div>					
+							</div>
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer" th:fragment="Footer"><!--Footer-->
+		
+		<div class="footer-widget">
+			<div class="container" th:if="${not #lists.isEmpty(lienhe)} " >
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="single-widget">
+							<h2>Hình Ảnh Cửa Hàng</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<img  th:src="@{'~/uploads/'+${lienhe.get(0).image}}" width="100%" height="50%"/>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="single-widget">
+							<h2>Thông Tin Cửa Hàng</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li>[[${lienhe.get(0).name}]]</li>
+								<li>Địa Chỉ: [[${lienhe.get(0).address}]]</li>
+								<li>Số Điện Thoại: [[${lienhe.get(0).phone}]]</li>
+								<li>Email: [[${lienhe.get(0).email}]]</li>
+							</ul>
+						</div>
+					</div>
+					
+				
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+
+  	<script th:src="@{/Home/js/jquery.js}"></script>
+  	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+  	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+  	<script th:src="@{/Home/js/price-range.js}"></script>
+  	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+  	<script th:src="@{/Home/js/main.js}"></script>
+  	
+	
+	
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+	<div class="container">
+			<div class="row">
+				<div class="alert alert-danger" id="Alerbox" th:text="${successMessage}" th:if="${successMessage ne null}">
+				</div>
+			</div>
+		</div>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>DANH SÁCH CÁ GIỐNG</h2>
+						<div class="panel-group category-products" id="accordian">
+							<!--category-productsr-->
+							<div class="panel panel-default"
+								th:each="top10Fish,iterStat : ${Top10Fish} ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{'/ChiTietCaGiong/' +${top10Fish.id}}"
+											th:text="${top10Fish.name}"></a>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<!--/category-products-->
+					</div>
+				</div>
+				<div class="col-sm-9 padding-right">
+					<div class="product-details">
+						<!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img th:src="@{'~/uploads/'+${fish.image}}" alt="" />
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information">
+								<!--/product-information-->
+								<h2 th:text="${fish.name}"></h2>
+								<img th:src="@{~/images/product-details/rating.png}" alt="" />
+
+								<h2 th:if=" ${fish.price} == 0 ">Liên hệ với trại giống</h2>
+								<h2 th:if="${fish.price} > 0 "
+									th:text="${'Giá: '+ #numbers.formatDecimal(fish.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+								
+								
+								<span th:if="${fish.quality} > 0 ">
+								<form method="get" th:action="@{/User/ThemVaoGioHangChiTiet}">
+								<input type="hidden" th:field="${fish.id}" />
+								<label>Số Lượng:</label> <input type="number" min="0" value="1" name="quality"/>
+									<button type="Submit" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng
+									</button>
+									</form>	
+								</span>
+		
+								<p>
+									<b>Trạng Thái:</b> <span th:if="${fish.quality} > 0 ">
+										CÒN HÀNG ([[${fish.quality}]])</span> <span
+										th:if="${fish.quality} == 0 "> HẾT HÀNG</span>
+								</p>
+							</div>
+							<!--/product-information-->
+						</div>
+					</div>
+					<!--/product-details-->
+
+					<div class="category-tab shop-details-tab">
+						<!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li><a href="#details" data-toggle="tab">ĐẶC ĐIỂM CÁ
+										GIỐNG</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+
+							<div class="tab-pane fade active in" id="reviews">
+								<div class="col-sm-12">
+									<p th:text="${fish.description}"></p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!--/category-tab-->
+
+					<div class="recommended_items"
+						th:replace="TrangChu :: recommended_items">
+						<!--recommended_items-->
+
+					</div>
+					<!--/recommended_items-->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(5000).slideUp(1500);
+
+		});
+	</script>
+
+
+</body>
+</html>

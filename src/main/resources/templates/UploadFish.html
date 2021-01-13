@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: head">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<!-- Menu navigation -->
+			<div class="col-md-3 left_col" th:replace="Layout :: left_col"></div>
+
+			<!-- top navigation -->
+			<div class="top_nav" th:replace="Layout :: top_nav"></div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Chỉnh Sửa Cá Giống</h3>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+							<div class="x_panel">
+								
+								<div class="x_content">
+							 <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary" id="Alerbox" ></p>
+								
+									<br />
+									<form th:action="@{/Admin/FishUpload/save}" th:object="${fish}"
+										class="form-horizontal form-label-left needs-validation"
+										method="post" enctype="multipart/form-data" novalidate>
+										<input type="hidden" th:field="*{id}" />
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align"
+												for="name">Tên Cá Giống <span>*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" class="form-control" th:field="*{name}" required>
+												<div class="invalid-feedback">Vui lòng nhập tên cá giống</div>
+
+											</div>
+										</div>
+									<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align"
+												for="quality">Số Lượng <span>*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" class="form-control" th:field="*{quality}" required>
+												<div class="invalid-feedback">Vui lòng nhập số ượng</div>
+
+											</div>
+										</div>
+										
+									<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align"
+												for="price">Giá Cá Giống <span>*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" class="form-control" th:field="*{price}" >
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align"
+												for="description">Mô Tả <span>*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea type="text" class="form-control" th:field="*{description}" required rows="7" cols="100%" ></textarea>
+												<div class="invalid-feedback">Vui lòng nhập mô tả </div>
+
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label for="middle-name"
+												class="col-form-label col-md-3 col-sm-3 label-align"> Upload Hình Ảnh</label>
+											<div class="col-md-6 col-sm-6 ">
+													<img th:src="@{'~/uploads/'+*{image}}" width="200px" height="200px" >
+												<input type="hidden" th:field="*{image}"/>
+															
+											</div>								
+										</div>
+										
+										
+										<div class="item form-group">
+											<label for="middle-name"
+												class="col-form-label col-md-3 col-sm-3 label-align">  Hình Ảnh</label>
+											<div class="col-md-6 col-sm-6 ">
+											      <input type="file" class="custom-file-input"  name="filename" id="customFile">
+											      <label class="custom-file-label" for="customFile">Choose file</label>
+											</div>								
+										</div>
+										
+								<div class="ln_solid"></div>
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<button type="submit" class="btn btn-success">Cập Nhật</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- footer content -->
+			<footer th:replace="Layout :: footer"></footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+	<!-- jQuery -->
+	<script src="../static/vendors/jquery/dist/jquery.min.js"
+		th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="../static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"
+		th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+
+
+	<!-- bootstrap-progressbar -->
+	<script
+		src="../static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"
+		th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+
+
+	<!-- FastClick -->
+	<script src="../static/vendors/fastclick/lib/fastclick.js"
+		th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script src="../static/vendors/nprogress/nprogress.js"
+		th:src="@{/vendors/nprogress/nprogress.js}"></script>
+
+
+	<!-- Custom Theme Scripts -->
+	<script src="../static/vendors/custom.min.js"
+		th:src="@{/vendors/custom.min.js}"></script>
+
+	<script>
+		// Add the following code if you want the name of the file appear on select
+		$(".custom-file-input").on(
+				"change",
+				function() {
+					var fileName = $(this).val().split("\\").pop();
+					$(this).siblings(".custom-file-label").addClass("selected")
+							.html(fileName);
+				});
+
+		// Self-executing function
+		(function() {
+			'use strict';
+			window.addEventListener('load',
+					function() {
+						// Fetch all the forms we want to apply custom Bootstrap validation styles to
+						var forms = document
+								.getElementsByClassName('needs-validation');
+						// Loop over them and prevent submission
+						var validation = Array.prototype.filter.call(forms,
+								function(form) {
+									form.addEventListener('submit', function(
+											event) {
+										if (form.checkValidity() === false) {
+											event.preventDefault();
+											event.stopPropagation();
+										}
+										form.classList.add('was-validated');
+									}, false);
+								});
+					}, false);
+		})();
+		
+		
+
+	        $(document).ready(function () {
+	            $('#Alerbox').remove('hide');
+	            $('#Alerbox').delay(5000).slideUp(1500);
+	        });
+		
+		
+	</script>
+
+
+</body>
+</html>

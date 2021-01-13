@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+		<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<div class="alert alert-danger" id="Alerbox" th:text="${successMessage}" th:if="${successMessage ne null}">
+			</div>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Hình Ảnh</td>
+							<td class="description">Tên Cá Giống</td>
+							<td class="price">Giá</td>
+							<td class="quantity">Số Lượng</td>
+							<td class="total">Tổng Tiền</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="el: ${cart}">
+							<td class="cart_product">
+								<img th:src="@{'~/uploads/'+ ${el.value.image}}" width="110" height="110"/>
+							</td>
+							<td class="cart_description">
+								<h4 th:text="${el.value.name}"></h4>
+							</td>
+							<td class="cart_price">
+								<p th:text=" ${#numbers.formatDecimal(el.value.price, 0, 'COMMA', 0, 'POINT')} + 'VND' " ></p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" th:href="@{'/User/ThemVaoGioHang/' + ${el.value.id}} + '?cartPage=true'"> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" th:value="${el.value.quantity}" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" th:href="@{'/subtract/' + ${el.value.id}}"> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price" th:with="formattedTotal = ${el.value.price} * ${el.value.quantity}" 
+								th:text="  ${#numbers.formatDecimal(formattedTotal, 0, 'COMMA', 0, 'POINT')}+ 'VND'">$59</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" th:href="@{'/remove/' + ${el.value.id}}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+	
+	<section id="do_action">
+		<div class="container">
+			
+			<div class="row">
+				
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li><p><strong>THANH TOÁN</strong></p></li>
+							<li>Số Lượng  <span th:text="${session.size}"></span></li>
+							<li>Tổng Cộng <span th:text="  ${#numbers.formatDecimal(session.total, 0, 'COMMA', 0, 'POINT')} + 'VND'">>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" th:href="@{/User/Giohang/checkout}" >Đặt Hàng</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(5000).slideUp(1500);
+
+		});
+	</script>
+
+
+</body>
+</html>

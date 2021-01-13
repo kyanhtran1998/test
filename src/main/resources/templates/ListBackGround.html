@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: head">
+<src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+</head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<!-- Menu navigation -->
+			<div class="col-md-3 left_col" th:replace="Layout :: left_col"></div>
+
+			<!-- top navigation -->
+			<div class="top_nav" th:replace="Layout :: top_nav"></div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								DANH SÁCH ẢNH NỀN TRANG CHỦ
+							</h3>
+						</div>
+
+						<div class="title_right"></div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">
+							<div class="x_content">
+									<div th:text="${successMessage}"
+										th:if="${successMessage ne null}" class="alert alert-success"
+										id="Alerbox"></div>
+						<div id="AlerboxNew" th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+										
+								<div>
+									 <form method="post" th:object="${background}" th:action="@{/Admin/ListBackGround/Add}" enctype="multipart/form-data">
+									 <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 "> Upload Hình Ảnh</label>
+											<div class="col-md-5 col-sm-5 ">
+											      <input type="file" class="custom-file-input"  name="filename" id="customFile">
+											      <label class="custom-file-label" for="customFile">Choose file</label>
+											</div>		
+											 <div class="col-md-4 col-sm-4 ">
+											     <button class="btn btn-primary mb-5">Thêm</button>
+											</div>	 			
+										</div>
+							     	
+									 </form>
+									
+									<div class="clearfix"></div>
+									
+								</div>
+								
+
+									<!-- start project list -->
+									<table class="table table-striped projects">
+										<thead>
+											<tr>											
+												<th>ID</th>
+												<th style="width: 70%">Hình Ảnh</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${#lists.isEmpty(fishs)}">
+												<h3>Không có dữ liệu</h3>
+
+											</tr>
+											<tr th:each="product,iterStat : ${fishs}">
+												<td scope="row" th:text="${iterStat.count}"></td>
+												
+												<td>
+													<ul class="list-inline">
+														<li><img
+															th:src="@{'~/uploads/'+${product.image}}"
+															width="200px" height="200px"></li>
+
+													</ul>
+												</td>
+												<td><a href="#"
+													th:href="@{/Admin/ListBackGround/} + ${product.id}"
+													class="btn btn-round btn-danger btn-delete"><i
+														class="fa fa-trash-o"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!-- end project list -->
+								</div>
+							</div>
+
+						</div>
+					</div>
+				<!-- /Kết thúc giao diện nổi bật -->	
+				</div>
+
+			</div>
+			<!-- /page content -->
+
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> Bạn Có Muốn Xóa Dữ liệu	 Không ? </h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer">
+							<a href="" type="button" class="btn btn-danger" id="btnDelteYes">Có</a>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Không</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- footer content -->
+			<footer th:replace="Layout :: footer"></footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../static/vendors/jquery/dist/jquery.min.js"
+		th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="../static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"
+		th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+
+
+	<!-- bootstrap-progressbar -->
+	<script
+		src="../static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"
+		th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+
+
+
+<!-- Custom Theme Scripts -->
+	<script src="../static/vendors/custom.min.js"
+		th:src="@{/vendors/custom.min.js}"></script>
+	<script>
+	$(".custom-file-input").on(
+			"change",
+			function() {
+				var fileName = $(this).val().split("\\").pop();
+				$(this).siblings(".custom-file-label").addClass("selected")
+						.html(fileName);
+			});
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(3000).slideUp(1000);
+			$('#AlerboxNew').remove('hide');
+			$('#AlerboxNew').delay(3000).slideUp(1000);
+			$('.btn-delete').on('click', function (e) {
+			    e.preventDefault();
+			    var href =$(this).attr('href');
+			    $('#myModal #btnDelteYes').attr('href',href);
+			    $('#myModal').modal();
+			});
+		});
+	</script>
+</body>
+</html>

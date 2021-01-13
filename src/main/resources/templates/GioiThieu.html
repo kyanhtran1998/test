@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+	<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12" >
+				<div class="blog-post-area"  th:if="${not #lists.isEmpty(lienhe)}">
+					<h2 class="title text-center">GIỚI THIỆU TRẠI CÁ GIỐNG KIM
+						NGÂN</h2>
+					<div class="single-blog-post">
+						<img th:src="@{'~/uploads/'+${lienhe.get(0).image}}" width="100%"
+							height="30%" />
+							<br>
+						<p>Trại cá giống Kim Ngân chuyên cung cấp các loại con cá
+							giống: cá trê, cá lóc, cá lăng, cá diêu hồng, cá rô phi, cá cỏ,
+							cá vượt, cá chép, cá trắm, cá tằm...tất cả các con giống của Tư
+							Hải hoàn toàn yên tâm về chất lượng và sức đề kháng của con
+							giống.</p>
+						<br>
+						<p>Trại cá giống Kim Ngân được thành lập hơn 16 năm, từ một
+							trang trại quy mô nhỏ, sau nhiều nỗ lực vươn lên nhằm khẳng định
+							uy tín, hiện nay trại cá đã cho ra các loại giống cá tốt và định
+							hướng trong tương lai, trại sẽ mở rộng thêm diện tích sản xuất và
+							gia tăng về chủng loại và sản lượng sản xuất cá giống cung cấp ra
+							thị trường. Định hướng lâu dài trại cá giống Tư Hải tiếp tục giữ
+							vững thị trường, nâng cao chất lượng về con giống và tính cạnh
+							tranh của trang trại và xây dựng thương hiệu Kim Ngân ngày càng
+							lớn mạnh.</p>
+						<br>
+
+						<p>
+							<strong>Đến với Trại cá giống Kim Ngân quý khách hàng sẽ
+								được:</strong>
+						</p>
+						<br>
+
+						<p>- Tham quan trang trại mà không cần mua.</p>
+						<p>- Tư vấn kỹ thuật chuồng trại và chăm sóc miễn phí.</p>
+						<p>- Được lựa con giống phù hợp với tình hình kinh tế hiện nay
+							và nguồn tài chính của gia đình.</p>
+						<p>- Được lựa chọn con giống tùy thích khi mua.</p>
+						<p>- Cung cấp trọn gói cho các dự án, có dịch vụ giao tận nơi
+							cho các cơ sở và tư vấn kĩ thuật về nuôi cá giống.</p>
+						<p>- Luôn ổn định và mở rộng quy mô nuôi trồng để có thể đáp
+							ứng nhu cầu ngày càng lớn của thị trường.</p>
+						<p>- Hỗ trợ cước phí vận chuyển cho khách hàng đặt hàng với số
+							lượng lớn đến tận nơi tại các tỉnh thành trên đất nước Việt Nam.
+
+
+						</p>
+						<p>- Hiện tại, trại cá đang cung cấp chủ yếu cho thị trường ở
+							TP. HCM, các tỉnh miền Trung, miền Bắc và đang mở rộng thị trường
+							xuống các tỉnh miền Tây.</p>
+						<br>
+					</div>
+				</div>
+				<!--/blog-post-area-->
+
+
+
+
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+
+
+
+</body>
+</html>

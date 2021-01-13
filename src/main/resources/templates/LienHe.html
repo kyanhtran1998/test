@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="blog-post-area" th:if="${not #lists.isEmpty(lienhe)}" >
+						<h2 class="title text-center">LIÊN HỆ</h2>
+						<div class="single-blog-post">
+							<div id="map-canvas" style="width: 100% px; height: 500px"></div>
+							<h1>[[${lienhe.get(0).name}]]</h1>
+						</div>
+						<address>
+							<span class="fa fa-map-marker secondary2">&nbsp;</span> Địa Chỉ:
+							[[${lienhe.get(0).address}]]
+						</address>
+						<p class="em-phone">
+							<span class="fa fa-phone secondary2">&nbsp;</span>Số Điện Thoại:
+							<span class="primary">[[${lienhe.get(0).phone}]]</span>
+						</p>
+						</p>
+						<p class="em-email">
+							<span class="fa fa-envelope secondary2">&nbsp;</span>Email: <span
+								class="secondary2">[[${lienhe.get(0).email}]]</span>
+						</p>
+					</div>
+					<!--/blog-post-area-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvaxMRMLvAnaIgVKXpturHxldsZ2gTeJE" type="text/javascript"></script>
+       <script type="text/javascript">
+            function initialize() {
+                var myLatlng = new google.maps.LatLng(10.508769108872004, 105.89933467984218);
+                var mapOptions = {
+                    zoom: 15	,
+                    center: myLatlng
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                var myLatLngtest = { lat: 10.508769108872004, lng: 105.89933467984218 };
+                var marker = new google.maps.Marker({
+                    position: myLatLngtest,
+                    map: map,
+                    title: 'Trại Cá Giống Kim Ngân'
+                });
+            }
+           
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
+
+</body>
+</html>

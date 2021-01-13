@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+	<div class="container">
+		<div class="row">
+			<div class="alert alert-success" id="Alerbox" th:text="${successMessage}" th:if="${successMessage ne null}">
+				<strong>Đặt Hàng Thành Công </strong>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>DANH SÁCH CÁ GIỐNG</h2>
+						<div class="panel-group category-products" id="accordian">
+							<!--category-productsr-->
+							<div class="panel panel-default" th:if="${Top10Fish}"
+								th:each="top10Fish,iterStat : ${Top10Fish} ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{'/ChiTietCaGiong/' +${top10Fish.id}}"
+											th:text="${top10Fish.name}"></a>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<!--/category-products-->
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items">
+						<!--features_items-->
+						<h2 class="title text-center">Danh Sách Cá Giống</h2>
+						<div class="col-sm-4" th:if="${fishs.pageList}"
+							th:each="fishNew,iterStat : ${fishs.pageList}">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<a th:href="@{'/ChiTietCaGiong/' +${fishNew.id}}"> <img
+											th:src="@{'~/uploads/'+${fishNew.image}}" alt="" />
+										</a>
+										<h2 th:if=" ${fishNew.price} == 0 ">Liên hệ với trại
+											giống</h2>
+										<h2 th:if="${fishNew.price} > 0 "
+											th:text="${#numbers.formatDecimal(fishNew.price, 0, 'COMMA', 0, 'POINT')+' VND'}"></h2>
+										<p th:text="${fishNew.name}">
+											<a th:href="@{/ChiTietCaGiong/ +${fishNew.id}}"></a>
+										</p>
+										<a  th:if="${fishNew.quality} > 0 " th:href="@{'/User/ThemVaoGioHang/' + ${fishNew.id}}"
+											class="btn btn-default add-to-cart"><i
+											class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+										<a  th:if="${fishNew.quality} == 0 " class="btn btn-default add-to-cart"><i
+											class="fa fa-shopping-cart"></i> Hết Hàng</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--features_items-->
+					<ul class="pagination">
+						<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+							th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+							<a th:href="@{|${baseUrl}${item}|}" th:text='${item}'></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(5000).slideUp(1500);
+
+		});
+	</script>
+
+
+</body>
+</html>

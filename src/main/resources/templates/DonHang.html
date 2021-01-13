@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="TrangChu :: headPage">
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>QUẢN LÝ TÀI KHOẢN</h2>
+						<div class="panel-group category-products" id="accordian">
+							<!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{/User/ThongTinKhachHang}">Thông Tin Khách
+											Hàng</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{/User/DoiMatKhau}">Đổi Mật Khẩu</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{/User/DonHang}">Đơn Hàng Đang Mua</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a th:href="@{/User/DonHangDaMua}">Đơn Hàng Đã Mua</a>
+									</h4>
+								</div>
+							</div>
+
+						</div>
+						<!--/category-products-->
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items">
+						<!--features_items-->						
+						<h2 class="title text-center">
+							[[${donhangdamua}]]
+						</h2>
+						<div class="col-sm-12">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Mã Đơn Hàng</th>
+										<th>Tên Sản Phẩm</th>
+										<th style="width: 20%">Địa Chỉ Đặt Hàng</th>
+
+										<th style="width: 10%">Số Tiền</th>
+										<th>Ngày Đặt Mua</th>
+										<th>Trạng Thái</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:if="${#lists.isEmpty(listorder)}">
+										<h3>Không Có Dữ Liệu</h3>
+									</tr>
+									<tr th:each="product,iterStat : ${listorder}">
+										<td th:text="${'#00'+product.id}"></td>
+										<td><span
+											th:each="test,iterStat : ${product.orderDetail}"
+											th:text="${test.fish.name} +' '"></span></td>
+										<td th:text="${product.user.address}"></td>
+										<td
+											th:text="${#numbers.formatDecimal(product.amount, 0, 'COMMA', 0, 'POINT')} + 'VND' "></td>
+										<td th:text="${#dates.format(product.date, 'dd/MM/yyyy')}"></td>
+										<td th:if="${product.status} > 0 ">
+											<button type="button" class="btn btn-round btn-danger"
+												style="font-size: 13px;">Xử lý</button>
+										</td>
+										<td th:if="${product.status} == 0 ">
+											<button type="button" class="btn btn-round btn-success"
+												style="font-size: 13px;">Chưa Xử lý</button>
+										</td>
+										<td th:if="${product.status} == 0"><a href="#"
+											th:href="@{/User/DonHang/} + ${product.id}"
+											class="btn btn-round btn-info btn-delete" style="font-size: 13px;">Xóa</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!--features_items-->
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Bạn Có Muốn Xóa Đơn Hàng</h5>
+						</div>
+						<div class="modal-footer">
+							<a href="" type="button" class="btn btn-danger" id="btnDelteYes">Có</a>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Không</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(3000).slideUp(1500);
+
+			$('.btn-delete').on('click', function (e) {
+			    e.preventDefault();
+			    var href =$(this).attr('href');
+			    $('#myModal #btnDelteYes').attr('href',href);
+			    $('#myModal').modal();
+			});
+		});
+	</script>
+
+
+</body>
+</html>

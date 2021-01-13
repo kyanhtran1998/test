@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head  th:fragment="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>Trang Admin </title>
+
+    <!-- NProgress -->
+    <link href="../static/vendors/nprogress/nprogress.css"
+	th:href="@{/vendors/nprogress/nprogress.css}"
+	rel="stylesheet" />
+	
+ 	 <!-- Bootstrap -->
+    <link href="../static/vendors/bootstrap/dist/css/bootstrap.min.css"
+	th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet" />
+    
+    <!-- Font Awesome -->
+        <link href="../static/vendors/font-awesome/css/font-awesome.min.css"
+	th:href="@{/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet" />
+
+    <!-- iCheck -->
+	
+
+    <!-- JQVMap -->
+    <!-- bootstrap-daterangepicker -->
+
+    <!-- Custom Theme Style -->
+            <link href="../static/vendors/custom.min.css"
+	th:href="@{/vendors/custom.min.css}"
+	rel="stylesheet" />
+	    <!-- Main Theme script -->
+	
+	  
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col" th:fragment="left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"> <span>Trại Cá Giống Kim Ngân</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img th:src="@{~/uploads/user.jpg}" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,Trang Admin</span>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>DANH MỤC</h3>
+                            
+                
+                <ul class="nav side-menu">
+                  <li> <a href="#"  th:href="@{/TrangChu}"><i class="fa fa-home"></i>Trang Chủ</a></li>
+                   
+                    
+                  <li> <a href="#"  th:href="@{/Admin/ListUser}"> <i class=" fa fa-list"></i>Quản Lý User</a></li>
+                  <li></i> <a href="#"  th:href="@{/Admin/ListFish}"><i class=" fa fa-list"></i> Quản Lý Cá Giống</a>  </li>
+                
+                  <li> <a href="#"  th:href="@{/Admin/ListBackGround}"> <i class=" fa fa-list"></i>Quản Lý Ảnh nền </a></li> 
+                  <li><a href="#"  th:href="@{/Admin/ListFishTop}"> <i class=" fa fa-list"></i>Quản Lý Cá Giống Nổi Bật </a></li> 
+                  <li><a href="#"  th:href="@{/Admin/ListOrder}"> <i class=" fa fa-list"></i>Quản Lý Cá Đơn Hàng </a></li>
+                  <li><a href="#"  th:href="@{/Admin/ListBlog}"> <i class=" fa fa-list"></i>Quản Lý Tin Tức</a></li>
+                  <li><a href="#"  th:href="@{/Admin/Store}"> <i class=" fa fa-list"></i>Quản Lý Thông Tin Cửa Hàng</a></li> 
+                </ul>
+              </div>
+        
+            
+
+            </div>
+            <!-- /sidebar menu -->
+
+          
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav"  th:fragment="top_nav">
+          <div class="nav_menu">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <nav class="nav navbar-nav">
+              <ul class=" navbar-right">
+                 <li class="nav-item dropdown open" style="padding-left: 15px;">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                    <img th:src="@{~/uploads/user.jpg}" alt=""> <span  sec:authentication="name"> </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item"  th:href="@{/User/ThongTinKhachHang}">Thông tin Tài Khoản</a>
+                    <a class="dropdown-item"  th:href="@{/DangXuat}"><i class="fa fa-sign-out pull-right"></i>Đăng Xuất</a>
+                  </div>
+                </li>
+
+                <li role="presentation" class="nav-item dropdown open">
+
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+       
+
+
+
+   
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer th:fragment="footer">
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+   <!-- JS -->
+   
+   
+  </body>
+</html>

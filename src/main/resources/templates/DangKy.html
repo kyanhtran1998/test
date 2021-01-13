@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="TrangChu :: head">
+
+
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info" id="Alerbox">Đăng Ký Tài Khoản
+						Thành Công</div>
+				</div>
+
+				<h1>Đăng Ký</h1>
+				<form th:action="@{/DangKy}" th:object="${user}" method="post">
+
+					
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+						<label for="name" class="control-label">Tên Người Dùng</label> <input
+							id="name" class="form-control" th:field="*{name}" />
+						<p class="error-message"
+							th:each="error: ${#fields.errors('name')}" th:text="${error}">Validation
+							error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('phone')}? 'has-error':''">
+						<label for="phone" class="control-label">Số Điện Thoại</label> <input
+							id="phone" class="form-control" th:field="*{phone}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('phone')}" th:text="${error}">Validation
+							error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('address')}? 'has-error':''">
+						<label for="address" class="control-label">Địa Chỉ</label> <input
+							id="address" class="form-control" th:field="*{address}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('address')}" th:text="${error}">Validation
+							error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+						<label for="email" class="control-label">E-mail</label> <input
+							id="email" class="form-control" th:field="*{email}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
+							error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+						<label for="password" class="control-label">Mật</label> <input
+							id="password" class="form-control" type="password"
+							th:field="*{password}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('password')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+						<label for="confirmPassword" class="control-label">Xác Nhận Mật Khẩu
+							</label> <input id="confirmPassword" class="form-control"
+							type="password" th:field="*{confirmPassword}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('confirmPassword')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Đăng Ký</button>
+						
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(3000).slideUp(1000);	
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="TrangChu :: head">
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h1>Đăng Nhập </h1>
+				<br>
+				<form th:action="@{/DangNhap}" method="post">
+					<div th:if="${param.error}">
+						<div class="alert alert-danger" id="Alerbox"> Email Và Mật Khẩu Không Đúng</div>
+					</div>
+					<div th:if="${param.logout}">
+						<div class="alert alert-info" id="Alerbox">Đăng Xuất Thành Công</div>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>: <input type="text"
+							id="email" name="email" class="form-control"
+							autofocus="autofocus" placeholder="Nhập Email" />
+					</div>
+					<div class="form-group">
+						<label for="password">Mật Khẩu</label>: <input type="password"
+							id="password" name="password" class="form-control"
+							placeholder="Nhập Mật Khẩu" />
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="login-submit" id="login-submit"
+									class="form-control btn btn-primary" value="Đăng Nhập" />
+							</div>
+							<div >
+								<a th:href="@{/QuenMatKhau}">Quên Mật Khẩu</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+	<script th:src="@{/Home/js/jquery.js}"></script>
+  	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+  	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+  	<script th:src="@{/Home/js/price-range.js}"></script>
+  	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+  	<script th:src="@{/Home/js/main.js}"></script>
+  	
+	<script>
+		$(document).ready(function() {
+			$('#Alerbox').remove('hide');
+			$('#Alerbox').delay(3000).slideUp(1000);	
+		});
+	</script>
+ 
+
+    </body>
+
+</html>

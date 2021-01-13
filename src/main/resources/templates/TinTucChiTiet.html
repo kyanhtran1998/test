@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Trang Chủ</title>
+<link th:href="@{/Home/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/font-awesome.min.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/prettyPhoto.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/price-range.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/animate.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/main.css}" rel="stylesheet" />
+<link th:href="@{/Home/css/responsive.css}" rel="stylesheet" />
+
+
+</head>
+<!--/head-->
+
+<body>
+	<header id="header" th:replace="TrangChu :: header">
+		<!--header-->
+
+	</header>
+	<!--/header-->
+
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="blog-post-area">
+						<h2 class="title text-center">TIN TỨC MỚI NHẤT</h2>
+						<div class="single-blog-post">
+							<h3 th:text="${fish.name}"></h3>
+							<img th:src="@{'~/uploads/'+${fish.image}}" alt=""  width="100%"/>
+							<textarea id="autoresizing" cols="100%" readonly>[[${fish.content}]]</textarea>
+						</div>
+					</div>
+					<!--/blog-post-area-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<br>
+	<footer id="footer" th:replace="TrangChu :: Footer">
+		<!--Footer-->
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script th:src="@{/Home/js/jquery.js}"></script>
+	<script th:src="@{/Home/js/bootstrap.min.js}"></script>
+	<script th:src="@{/Home/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/Home/js/price-range.js}"></script>
+	<script th:src="@{/Home/js/jquery.prettyPhoto.js}"></script>
+	<script th:src="@{/Home/js/main.js}"></script>
+	<script
+		src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	<script>
+	autosize(document.getElementById("autoresizing"));
+	</script>
+ 	 
+
+</body>
+</html>
